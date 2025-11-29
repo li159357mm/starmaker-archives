@@ -1,0 +1,44 @@
+
+export enum CharacterRole {
+  MAIN = '主角团',
+  SUPPORT = '配角 / NPC',
+  SPECIAL = '特殊 / 隐藏',
+  SYSTEM = '游戏系统 & 节日'
+}
+
+export interface Character {
+  id: string;
+  name: string;
+  role: CharacterRole;
+  locations: string[];
+  avatarUrl: string; 
+  description: string;
+  guideSteps: string[];
+  tips?: string[];
+  unlockConditions?: string;
+  routes?: {
+    name: string;
+    steps: string[];
+  }[];
+}
+
+export interface HackerCode {
+  code: string;
+  answer: string;
+  meaning: string;
+}
+
+export interface UpdateLog {
+  version: string;
+  date: string;
+  changes: string[];
+}
+
+export enum ViewState {
+  DASHBOARD = 'DASHBOARD',
+  CHARACTER_LIST = 'CHARACTER_LIST',
+  GAME_GUIDES = 'GAME_GUIDES',
+  HACKER_TOOL = 'HACKER_TOOL',
+  CHANGELOG = 'CHANGELOG',
+  ABOUT = 'ABOUT'
+}
