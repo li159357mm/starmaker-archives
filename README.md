@@ -11,11 +11,31 @@
 3. 在 **Source** 部分选择 **GitHub Actions**
 4. 保存设置
 
-### 2. 自动部署
+### 2. 设置自定义域名（可选）
 
-项目已经配置了GitHub Actions工作流，当推送到 `main` 分支时会自动构建并部署到GitHub Pages。
+1. 在 **Pages** 设置页面的 **Custom domain** 部分输入你的域名
+2. 点击 **Save**
+3. 在你的域名注册商处添加CNAME记录：
+   ```
+   Type: CNAME
+   Name: www (或 @ 用于根域名)
+   Value: [你的GitHub用户名].github.io
+   ```
+4. 或者添加A记录：
+   ```
+   Type: A
+   Name: @ (根域名) 或 www
+   Value: 185.199.108.153
+   Value: 185.199.109.153  
+   Value: 185.199.110.153
+   Value: 185.199.111.153
+   ```
 
-### 3. 访问网站
+### 3. 自动部署
+
+项目已经配置了GitHub Actions工作流，当推送到 `master` 分支时会自动构建并部署到GitHub Pages。
+
+### 4. 访问网站
 
 部署完成后，你的网站将可以通过以下URL访问：
 ```
