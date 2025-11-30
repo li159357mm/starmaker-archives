@@ -20,6 +20,7 @@ export interface Character {
     name: string;
     steps: string[];
   }[];
+  images?: string[]; // 用于图片轮播功能
 }
 
 export interface HackerCode {

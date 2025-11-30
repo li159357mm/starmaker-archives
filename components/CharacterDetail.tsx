@@ -1,7 +1,6 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Character } from '../types';
-import { X, MapPin, Key, AlertTriangle, ArrowRight, CheckCircle2, CornerDownRight, ScrollText, GitBranch } from 'lucide-react';
+import { X, MapPin, Key, AlertTriangle, ArrowRight, CheckCircle2, CornerDownRight, ScrollText, GitBranch, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CharacterDetailProps {
   character: Character;
@@ -9,6 +8,29 @@ interface CharacterDetailProps {
 }
 
 const CharacterDetail: React.FC<CharacterDetailProps> = ({ character, onClose }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Get all images for the character
+  const getCharacterImages = () => {
+    if (character.images && character.images.length > 0) {
+      return character.images;
+    }
+    // Fallback to avatarUrl if no specific images array
+    return [character.avatarUrl];
+  };
+
+  const characterImages = getCharacterImages();
+  const hasMultipleImages = characterImages.length > 1;
+
+  // Navigation functions
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % characterImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + characterImages.length) % characterImages.length);
+  };
+
   // Helper function to parse custom tags for styling
   const renderRichText = (text: string) => {
     const parts = text.split(/(\[r\].*?\[\/r\]|\[g\].*?\[\/g\]|\[b\].*?\[\/b\]|\[big\].*?\[\/big\])/g);
@@ -66,12 +88,58 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({ character, onClose })
         <div className="flex flex-1 overflow-hidden">
           {/* Left Sidebar - Image & Info (Fixed) */}
           <div className="w-96 bg-slate-50/80 border-r border-slate-100 p-8 flex flex-col gap-8 overflow-y-auto shrink-0 hidden lg:flex">
+            {/* Image Carousel */}
             <div className="aspect-[3/4] w-full rounded-2xl overflow-hidden shadow-lg border-4 border-white relative group">
               <img 
-                src={character.avatarUrl} 
-                alt={character.name} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                src={characterImages[currentImageIndex]} 
+                alt={`${character.name} - 图片 ${currentImageIndex + 1}`} 
+                className="w-full h-full object-cover transition-all duration-500" 
               />
+              
+              {/* Navigation Arrows - Only show if multiple images */}
+              {hasMultipleImages && (
+                <>
+                  <button 
+                    onClick={prevImage}
+                    title="上一张图片"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 border border-slate-200"
+                  >
+                    <ChevronLeft size={24} className="text-slate-700" />
+                  </button>
+                  <button 
+                    onClick={nextImage}
+                    title="下一张图片"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 border border-slate-200"
+                  >
+                    <ChevronRight size={24} className="text-slate-700" />
+                  </button>
+                </>
+              )}
+              
+              {/* Image Indicator Dots */}
+              {hasMultipleImages && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {characterImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      title={`查看图片 ${index + 1}`}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex 
+                          ? 'bg-white scale-125' 
+                          : 'bg-white/50 hover:bg-white/80'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+              
+              {/* Image Counter */}
+              {hasMultipleImages && (
+                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white text-sm px-3 py-1.5 rounded-full font-mono">
+                  {currentImageIndex + 1} / {characterImages.length}
+                </div>
+              )}
             </div>
 
             <div className="space-y-6">
@@ -108,25 +176,65 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({ character, onClose })
               {/* Profile Section */}
               <section className="space-y-8">
                 <div className="flex items-center gap-4 pb-4 border-b border-slate-100">
-                  <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                  <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl shadow-lg">
                     <ScrollText size={28} />
                   </div>
                   <h3 className="text-3xl font-black text-slate-800">档案概览</h3>
                 </div>
                 
-                <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 text-slate-700 leading-loose text-lg shadow-sm">
+                {/* Enhanced Description with Route Visualization */}
+                <div className="bg-gradient-to-br from-slate-50 to-blue-50/30 p-8 rounded-3xl border border-slate-100 text-slate-700 leading-loose text-lg shadow-lg backdrop-blur-sm">
                   {renderRichText(character.description)}
+                  
+                  {/* Special Route Visualization for Anna */}
+                  {character.id === 'anna' && (
+                    <div className="mt-8 p-6 bg-white/80 rounded-2xl border border-slate-200 shadow-sm">
+                      <h4 className="text-slate-800 font-bold mb-6 text-lg flex items-center gap-2">
+                        <span className="w-3 h-3 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"></span>
+                        路线选择可视化
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="text-center">
+                          <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-emerald-200 mb-4">
+                            <img 
+                              src="/images/安娜善良.png" 
+                              alt="安娜善良路线" 
+                              className="w-full h-full object-cover" 
+                            />
+                          </div>
+                          <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-4 rounded-xl border border-emerald-200">
+                            <h5 className="font-bold text-emerald-700 text-lg mb-2">纯洁路线</h5>
+                            <p className="text-sm text-emerald-600">保持纯洁行为，减少堕落值</p>
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-red-200 mb-4">
+                            <img 
+                              src="/images/安娜堕落.png" 
+                              alt="安娜堕落路线" 
+                              className="w-full h-full object-cover" 
+                            />
+                          </div>
+                          <div className="bg-gradient-to-br from-red-50 to-pink-50 p-4 rounded-xl border border-red-200">
+                            <h5 className="font-bold text-red-700 text-lg mb-2">恶堕路线</h5>
+                            <p className="text-sm text-red-600">调皮行为增加堕落值</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {character.tips && character.tips.length > 0 && (
-                  <div className="bg-amber-50/50 border border-amber-100 p-8 rounded-3xl">
+                  <div className="bg-gradient-to-br from-amber-50/80 to-orange-50/50 border border-amber-200 p-8 rounded-3xl shadow-lg">
                     <h4 className="text-amber-600 font-bold mb-4 flex items-center gap-2 text-base uppercase tracking-wider">
-                      <AlertTriangle size={20} /> 重要提示
+                      <AlertTriangle size={20} className="text-amber-500" /> 
+                      重要提示
                     </h4>
                     <ul className="space-y-4">
                       {character.tips.map((tip, idx) => (
                         <li key={idx} className="flex items-start gap-4 text-slate-700 text-lg leading-relaxed">
-                          <span className="mt-2 w-2 h-2 bg-amber-400 rounded-full shrink-0" />
+                          <span className="mt-2 w-2 h-2 bg-amber-500 rounded-full shrink-0 shadow-sm" />
                           <span>{renderRichText(tip)}</span>
                         </li>
                       ))}

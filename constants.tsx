@@ -1,10 +1,9 @@
-
 import { Character, CharacterRole, HackerCode, UpdateLog } from './types';
 import { Target, Users } from 'lucide-react';
 import React from 'react';
 
 // 本地图片路径前缀 - 使用中文文件名
-const IMG_PATH = "./images/";
+const IMG_PATH = "images/";
 
 export const HACKER_CODES: HackerCode[] = [
   { code: 'BLDRS GT', answer: 'Baldurs Gate', meaning: '博德之门' },
@@ -38,6 +37,74 @@ export const HACKER_CODES: HackerCode[] = [
   { code: 'TH SMS', answer: 'The Sims', meaning: '模拟人生' },
   { code: 'TTR', answer: 'Tetris', meaning: '俄罗斯方块' },
   { code: 'WRLD F WRCRFT', answer: 'World of Warcraft', meaning: '魔兽争霸' },
+];
+
+// Update Logs
+export const GAME_CHANGELOG: UpdateLog[] = [
+  {
+    version: "1.6B",
+    date: "2024-12-20",
+    changes: [
+      "新增节日系统：情人节、万圣节、圣诞节等特殊剧情",
+      "增加多个新角色和隐藏剧情",
+      "优化游戏性能和稳定性",
+      "修复已知bug和问题"
+    ]
+  },
+  {
+    version: "1.5",
+    date: "2024-10-15",
+    changes: [
+      "新增野外旅行系统",
+      "增加多个支线任务",
+      "优化UI界面和用户体验",
+      "修复部分剧情bug"
+    ]
+  }
+];
+
+export const TOOL_CHANGELOG: UpdateLog[] = [
+  {
+    version: "1.0",
+    date: "2025-11-29",
+    changes: [
+      "初始版本发布",
+      "包含所有角色档案和攻略",
+      "集成黑客代码查询工具",
+      "支持图片轮播功能",
+      "响应式设计适配移动端"
+    ]
+  }
+];
+
+// Author Information
+export const AUTHOR_INFO = {
+  name: "Starmaker Archives",
+  description: "为《造星物语》玩家提供最全面的攻略和工具支持",
+  supportMessage: "如果这个工具对你有帮助，请考虑支持一下作者！",
+  platforms: [
+    { name: "GitHub", link: "https://github.com", icon: "💻" },
+    { name: "Bilibili", link: "https://bilibili.com", icon: "📺" },
+    { name: "Discord", link: "https://discord.com", icon: "💬" }
+  ],
+  qrWechat: "images/微信.png",
+  qrAlipay: "images/支付宝.png"
+};
+
+// Supporters List
+export const SUPPORTERS = [
+  "玩家A",
+  "玩家B", 
+  "玩家C",
+  "玩家D",
+  "玩家E",
+  "玩家F",
+  "玩家G",
+  "玩家H",
+  "玩家I",
+  "玩家J",
+  "玩家K",
+  "玩家L"
 ];
 
 export const CHARACTERS: Character[] = [
@@ -117,7 +184,8 @@ export const CHARACTERS: Character[] = [
     role: CharacterRole.MAIN,
     locations: ['家', '教堂', '商场', '健身房', '市中心', '海滨', '野外旅行', '花店', '荒地', '牧场'],
     avatarUrl: `${IMG_PATH}安娜.png`,
-    description: '女主角，核心剧情人物。安娜的5颗心会根据她的[r]堕落[/r]和[g]善良[/g]值来选择路线。调皮行为增加堕落值（恶魔图标），保持纯洁减少堕落值（天使图标）。[r]堕落值超过10[/r]进入放纵路线，反之浪漫路线。',
+    images: [`${IMG_PATH}安娜.png`, `${IMG_PATH}安娜善良.png`, `${IMG_PATH}安娜堕落.png`],
+    description: '💖 女主角，核心剧情人物\n\n🎭 路线选择机制：\n[g]天使图标[/g] - 保持纯洁行为减少堕落值\n[r]恶魔图标[/r] - 调皮行为增加堕落值\n\n📊 路线判定：\n[g]浪漫路线[/g] - 堕落值 ≤ 10\n[r]放纵路线[/r] - 堕落值 > 10\n\n🌟 安娜的5颗心会根据堕落/善良值自动选择最终路线',
     unlockConditions: '初始角色',
     guideSteps: [
       '给安娜拍照，直到达到1颗心。周三初始场景后她邀请你去衣柜（[r]不要急于将订阅者到1000[/r]，否则会提前结束衣柜场景）。',
@@ -130,7 +198,7 @@ export const CHARACTERS: Character[] = [
     ],
     tips: [
       '周五商场：开车送安娜去商场时，可触发洗手间场景（需4颗心）。',
-      '周二花店：安娜会让你去“The Line”花店接她（放纵线第3次后无法继续）。',
+      '周二花店：安娜会让你去"The Line"花店接她（放纵线第3次后无法继续）。',
       '周一加油站：可参加洗车活动。',
       '后宫结局条件：完成安娜故事、阿德里安和约瑟夫离开路线、夏洛特安娜路线。周一在客厅见到两人，选择[g]邀请一起上游艇[/g]。'
     ],
@@ -140,13 +208,13 @@ export const CHARACTERS: Character[] = [
         steps: [
           '第一个星：去海滩，阳光下放松 -> 选日光浴 -> 遇到短发女粉丝 -> 邀请到房间触发CG (推荐5心再来)。', 
           '第二个星：参加选美比赛（你会输） -> 去商场找祖里要特别泳衣 -> 再次参加并获胜。',
-          '第三个星：去酒吧触发莱拉尼CG -> 参加选美 -> 下次访问海滩遇到芙蕾雅 -> 告诉安娜[b]“我们在阳光下放松一下怎么样？”[/b] -> “当然没问题” -> “你为什么不给我看看？” -> 下次拜访芙蕾雅邀请到房间。'
+          '第三个星：去酒吧触发莱拉尼CG -> 参加选美 -> 下次访问海滩遇到芙蕾雅 -> 告诉安娜[b]"我们在阳光下放松一下怎么样？"[/b] -> "当然没问题" -> "你为什么不给我看看？" -> 下次拜访芙蕾雅邀请到房间。'
         ] 
       },
       { 
         name: '霜度假期 (三星达成)', 
         steps: [
-          '第一个星：去泡温泉鼓掌。浪漫路线：[g]“我看得出来，你正在发光”[/g]；堕落路线：[r]“这是一个仅供成年人使用的地方” -> “我们可以做任何我们想做的事”[/r]。',
+          '第一个星：去泡温泉鼓掌。浪漫路线：[g]"我看得出来，你正在发光"[/g]；堕落路线：[r]"这是一个仅供成年人使用的地方" -> "我们可以做任何我们想做的事"[/r]。',
           '第二个星：去参加节日喝点酒，之后安娜会送你一份礼物。',
           '第三个星：去镇上警告狼人事情 -> 去露营遇到狼人 -> 再见老人 -> 商场买精致的肉类 -> 返回喂狼人。'
         ] 
@@ -172,14 +240,14 @@ export const CHARACTERS: Character[] = [
     unlockConditions: '初始角色',
     guideSteps: [
       '离开路线：攒下 20,000 美元，在阿德里安的房间里送给他。',
-      '无共享路线：告诉安娜“什么都没有。我相信他不会告密”。',
-      '共享路线（关键）：获得[b]“黑客”特性[/b]后，前去科技商店买喷油器。周四去他房间电脑用注射器。',
+      '无共享路线：告诉安娜"什么都没有。我相信他不会告密"。',
+      '共享路线（关键）：获得[b]"黑客"特性[/b]后，前去科技商店买喷油器。周四去他房间电脑用注射器。',
       '告诉安娜勾引阿德里安（只有在周五可执行）。',
       '周二去海滩分享安娜（查看两个CG场面）。',
       '周一去泳池，给安娜拍一张照片，点击右下角对话气泡。',
-      '在完全说服了阿德里安后，周二会来到阿德里安的房间（触发“游戏星期二 2.0”）。'
+      '在完全说服了阿德里安后，周二会来到阿德里安的房间（触发"游戏星期二 2.0"）。'
     ],
-    tips: ['需要获得“黑客”特性（找萨曼莎/肯剧情线）才能推进部分剧情。']
+    tips: ['需要获得"黑客"特性（找萨曼莎/肯剧情线）才能推进部分剧情。']
   },
   {
     id: 'joseph',
@@ -193,7 +261,7 @@ export const CHARACTERS: Character[] = [
       '保险箱密码：[big][b]7172[/b][/big]',
       '入口剧情：每周五在入口处与约瑟夫见面给他一杯啤酒，这样做5次。',
       '在星期五第三次给约瑟夫喝啤酒会触发过场动画。',
-      '你可以通过说“安娜和我正在运营一个星创页面”来告诉他真相。',
+      '你可以通过说"安娜和我正在运营一个星创页面"来告诉他真相。',
       '伊莎贝拉共享：CG伊莎贝拉后返回办公室与约瑟夫交谈 -> 选择告诉他 -> 返回酒店触发多人CG -> 出门后选择随便选（选告诉安娜他就会离开）。',
       '野营多人共享：需完成阿德里安与安娜分享路线和约瑟夫与安娜共享路线。周四上楼接受约瑟夫远足邀请。'
     ],
@@ -234,480 +302,393 @@ export const CHARACTERS: Character[] = [
     id: 'samantha',
     name: '萨曼莎 (Samantha)',
     role: CharacterRole.SUPPORT,
-    locations: ['郊区住宅', '郊区泳池', '海滨'],
+    locations: ['郊区住宅', '郊区泳池'],
     avatarUrl: `${IMG_PATH}萨曼莎.png`,
-    description: '肯的母亲，黑客小游戏来源。',
-    unlockConditions: '达到1000名订阅者并解锁肯后，可拜访萨曼莎。',
+    description: '肯的母亲，郊区住宅的女主人。与肯互动后，可以在郊区住宅找到她。',
+    unlockConditions: '与肯互动后解锁',
     guideSteps: [
-      '每周二或周五可前往她家。',
-      '完成5次黑客小游戏可获得[b]“黑客”特性[/b]（答案见黑客工具）。',
-      '第三次拜访后会触发海滩邀约。周一在海滩互动3次，周二/周五为她拍摄3次照片。',
-      '阿德里安加入：完成肯的萨曼莎路线。周二前往海滩与萨曼莎会面。在购物中心寻找阿德里安和萨曼莎。返回肯的住处建议邀请阿德里安。'
+      '与肯互动后，可以在郊区住宅找到萨曼莎。',
+      '多次拜访后，她会邀请你参加泳池派对。',
+      '完成泳池派对后，可以解锁更多亲密互动。',
+      '与萨曼莎建立关系后，会影响肯的剧情发展。'
     ],
-    tips: ['萨曼莎路线选择：立即向肯展示萨曼莎的照片 -> 在家中见面提出亲密请求 -> 告诉肯“我和萨曼莎聊过了，下次我们可以一起” -> 再次拜访观看互动。']
-  },
-  {
-    id: 'amelia',
-    name: '阿米莉亚 (Amelia)',
-    role: CharacterRole.SUPPORT,
-    locations: ['咖啡店', '海滨', '家'],
-    avatarUrl: `${IMG_PATH}阿米莉亚.png`,
-    description: '咖啡店老板。',
-    unlockConditions: '工作3次后可在周三邀约一起跑步。',
-    guideSteps: [
-      '需获得[g]“健康”[/g]和[g]“运动员”[/g]特性才能推进。',
-      '完成3次周三邀约后开启海滩剧情。',
-      '继续工作选择私下交流进行互动CG。',
-      '再次邀请周三跑步可以解锁CG。',
-      '解锁牧场任务后，周三可以邀请到牧场。'
-    ]
-  },
-  {
-    id: 'phoenix',
-    name: '凤凰 (Phoenix)',
-    role: CharacterRole.SUPPORT,
-    locations: ['健身馆', '门前', '商场', '牧场'],
-    avatarUrl: `${IMG_PATH}凤凰.png`,
-    description: '健身教练。健身房每训练3次获得一个特性，共两个特性“运动员”“专业运动员”改名为“合身”。',
-    unlockConditions: '健身房训练获得特性。',
-    guideSteps: [
-      '安娜分享线：满足特性后在走廊遇到安娜并答应带她去健身馆。再次去健身馆解锁安娜与凤凰多人CG。',
-      '保镖分享线：在商场帮助夏洛特解围 -> 推荐凤凰做保镖 -> 门前引荐 -> 商场赶走首富男 -> 游艇多人CG。',
-      '河分享线：必须满足所有凤凰前置任务。在公园解锁厕所后会遇到河与凤凰。'
-    ]
-  },
-  {
-    id: 'gabriel',
-    name: '加百利 (Gabriel)',
-    role: CharacterRole.SUPPORT,
-    locations: ['郊区公园', '商场', '山丘大厦'],
-    avatarUrl: `${IMG_PATH}加百利.png`,
-    description: '摄影大师。获得安娜1星查看电脑邮箱收到加百利邮件触发。',
-    unlockConditions: '邮件触发。',
-    guideSteps: [
-      '每周二学习“摄影”（3次获得特性）。',
-      '拍摄凯特任务：之后可邀请凯特作为模特。去凯特住处拍照（会紧张）。',
-      '周四去酒吧触发凯特喝酒壮胆对话鼓励。最后再选择拍照凯特会完成任务。',
-      '完整流程可获得“专业摄影师”特性。'
-    ]
+    tips: ['萨曼莎的剧情与肯的剧情紧密相关，建议同时推进两人的剧情线。']
   },
   {
     id: 'kate',
     name: '凯特 (Kate)',
     role: CharacterRole.SUPPORT,
-    locations: ['商场', '海滨', '凯特家'],
+    locations: ['商场', '市中心', '健身房'],
     avatarUrl: `${IMG_PATH}凯特.png`,
-    description: '校友。酒吧不让进入时可以在凯特这里学习“城市语言学家”特性。',
-    unlockConditions: '酒吧学习特性。',
+    description: '商场工作人员，经常在商场和市中心区域活动。',
+    unlockConditions: '在商场多次偶遇后解锁',
     guideSteps: [
-      '获得“有抱负的摄影师”后继续发展。',
-      '解锁凯特的住处后进行拍照（会紧张）。',
-      '周四去酒吧触发凯特喝酒壮胆对话鼓励。',
-      '周四同时再去海边触发凯特泳装对话鼓励。',
-      '最终照相成功解锁后续剧情和达成结局。'
-    ]
-  },
-  {
-    id: 'alice',
-    name: '爱丽丝 (Alice)',
-    role: CharacterRole.SUPPORT,
-    locations: ['家', '教堂', '霓虹灯街', '荒地'],
-    avatarUrl: `${IMG_PATH}爱丽丝.png`,
-    description: '哥特女。教堂访问3次后触发。',
-    unlockConditions: '教堂访问3次后触发。',
-    guideSteps: [
-      '可选择共享或独占路线。',
-      '需学习[b]“城市语言学家”[/b]特性技能推进剧情。',
-      '在舞厅可以选择共享和独享路线。',
-      '跳舞小游戏：鼠标碰到小星星5分，大星星1分，物品扣分，骷髅死亡。'
-    ]
-  },
-  {
-    id: 'tristan',
-    name: '特里斯坦 (Tristan)',
-    role: CharacterRole.SUPPORT,
-    locations: ['商场', '海滨', '市中心'],
-    avatarUrl: `${IMG_PATH}特里斯坦.png`,
-    description: '富哥+三姐妹。需5000订阅者解锁特里斯坦（天国丈夫特性）。',
-    unlockConditions: '需5000订阅者。',
-    guideSteps: [
-      '周三(第一次)购物中心：“你是谁” -> “你只选择年轻女性...” -> “孤独是这里的关键词”。',
-      '周三(第二次)海滩：“我已经长大了...” -> “我的榜样是我的......”。',
-      '周三(第三次)市中心街道：“耶稣，抓住它”。[r]不要选择“也许你应该结束它”或“你可能会变成一个小丑”[/r]。对话安慰他解锁“天国丈夫”特性。'
-    ]
-  },
-  {
-    id: 'isabella',
-    name: '伊莎贝拉 (Isabella)',
-    role: CharacterRole.SPECIAL,
-    locations: ['家', '商场', '市中心'],
-    avatarUrl: `${IMG_PATH}伊莎贝拉.png`,
-    description: '约瑟夫的前任。每日收入超5k且安娜4心在约瑟夫办公室解锁。',
-    unlockConditions: '每日收入超5k且安娜4心。',
-    guideSteps: [
-      '到商场偶遇伊莎贝拉，约周四酒店互动推进剧情。',
-      '3次互动后触发特殊状态（可与约瑟夫共享）。'
-    ]
-  },
-  {
-    id: 'liz',
-    name: '丽兹 (Liz)',
-    role: CharacterRole.SUPPORT,
-    locations: ['酒馆', '旅店'],
-    avatarUrl: `${IMG_PATH}丽兹.png`,
-    description: '酒保。安娜5心后周二酒吧触发。',
-    unlockConditions: '安娜5心后周二酒吧触发。',
-    guideSteps: [
-      '需要三次每周二推进。',
-      '解锁酒店3人互动后解锁（定期服务）。'
-    ]
-  },
-  {
-    id: 'chloe',
-    name: '克罗伊 (Chloe)',
-    role: CharacterRole.SUPPORT,
-    locations: ['山丘大厦'],
-    avatarUrl: `${IMG_PATH}克罗伊.png`,
-    description: '网红。安娜完成特定拍摄后解锁。',
-    unlockConditions: '安娜完成特定拍摄后解锁。',
-    guideSteps: ['每周拜访推进剧情。', '周三解锁最终场景。']
-  },
-  {
-    id: 'mario',
-    name: '马里奥 (Mario)',
-    role: CharacterRole.SPECIAL,
-    locations: ['车库', '山丘豪宅', '森林'],
-    avatarUrl: `${IMG_PATH}马里奥.png`,
-    description: '州长，反派角色。车库对话开启任务。',
-    unlockConditions: '车库对话开启任务。',
-    guideSteps: [
-      '每周工作推进剧情。完成3个小游戏后解锁新角色。',
-      '侦探游戏答案：第1次([b]无[/b]/[b]地址[/b]/[b]年龄[/b]) -> 第2次([b]无[/b]/[b]收入[/b]/[b]收入[/b]) -> 第3次([b]无[/b]/[b]职业[/b]/[b]姓名[/b])。注意：无就直接点确定。',
-      '完成后会让你调查秘书（每周二选择桑拿直到秘书解锁CG）。',
-      '第四次选择桑拿邀请马里奥解锁分享秘书路线。'
-    ]
-  },
-  {
-    id: 'katharina',
-    name: '卡塔琳娜 (Katharina)',
-    role: CharacterRole.SPECIAL,
-    locations: ['山丘豪宅', '商场', '海滨', '牧场'],
-    avatarUrl: `${IMG_PATH}卡塔琳娜.png`,
-    description: '州长夫人。',
-    unlockConditions: '获得马里奥信任。',
-    guideSteps: [
-      '先获得马里奥的信任。',
-      '办公室互动后露台发展关系。',
-      '随机商场相遇（可选择厕所触发CG）。'
-    ]
-  },
-  {
-    id: 'emma',
-    name: '艾玛 (Emma)',
-    role: CharacterRole.SPECIAL,
-    locations: ['山丘豪宅', '牧场'],
-    avatarUrl: `${IMG_PATH}艾玛.png`,
-    description: '秘书。',
-    unlockConditions: '获得马里奥信任。',
-    guideSteps: [
-      '先获得马里奥的信任。然后调查艾玛。',
-      '桑拿房3次相遇后选择路线。',
-      '不同选择影响后续发展【共享】【独享】。'
-    ]
-  },
-  {
-    id: 'sophia',
-    name: '索菲亚 (Sophia)',
-    role: CharacterRole.SUPPORT,
-    locations: ['商场', '加油站', '山丘豪宅', '森林', '海滨', '酒馆'],
-    avatarUrl: `${IMG_PATH}索菲亚.png`,
-    description: '女警察。购物中心相遇后开启任务。',
-    unlockConditions: '购物中心相遇。',
-    guideSteps: [
-      '加油站对话决定路线走向。可选择对抗或合作马里奥。',
-      '合作：注意顺序先同意对抗，然后对话马里奥时[r]不要选择告密[/r]。周五找索菲亚触发换装，带索菲亚进入再告密，马里奥才会关押在客房里。',
-      '对抗：选择不告诉马里奥，收集马里奥证据（可能需要三周）。周五去商店加油站找索菲亚抓捕马里奥。',
-      '解救：完成抓捕后解锁海边住处。再次去住处发现被抓，森林解锁破屋。注意解救索菲亚需要[b]满级健身[/b]或者[b]满级修行[/b]。'
-    ]
+      '在商场多次偶遇凯特后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与凯特建立良好关系后，可以获得商场折扣等福利。'
+    ],
+    tips: ['凯特通常在商场的工作时间出现，建议在白天前往商场寻找她。']
   },
   {
     id: 'frost_nina',
     name: '弗罗斯特 & 妮娜 (Frost & Nina)',
     role: CharacterRole.SUPPORT,
-    locations: ['医院'],
-    avatarUrl: `${IMG_PATH}弗罗斯特与妮娜.png`,
-    description: '医生与护士。神社之门小游戏失败解锁医院。',
-    unlockConditions: '神社之门小游戏失败解锁医院。',
+    locations: ['野外旅行', '营地', '森林'],
+    avatarUrl: `${IMG_PATH}弗罗斯特.png`,
+    images: [`${IMG_PATH}弗罗斯特.png`, `${IMG_PATH}妮娜.png`],
+    description: '野外旅行中的双人组合，弗罗斯特和妮娜经常一起出现在野外区域。',
+    unlockConditions: '在野外旅行中多次偶遇后解锁',
     guideSteps: [
-      '医生可以购买升级解锁（对话选项解锁CG）。',
-      '护士小游戏失败3次（每次解锁一个CG）。',
-      '牧场前置任务：需要与医生选择“找一些东西生产牛奶“，解锁特性[b]“催奶诱导师”[/b]。'
-    ]
+      '在野外旅行中多次偶遇弗罗斯特和妮娜后，可以开始与他们互动。',
+      '完成特定的野外任务后，可以解锁更多剧情。',
+      '与两人建立良好关系后，可以获得野外生存技能等奖励。'
+    ],
+    tips: ['弗罗斯特和妮娜通常在野外营地出现，建议在野外旅行时留意他们的踪迹。']
   },
   {
-    id: 'nyxara',
-    name: 'NYXARA & 大师',
-    role: CharacterRole.SPECIAL,
-    locations: ['森林', '神社', '霓虹灯街'],
-    avatarUrl: `${IMG_PATH}大师.png`,
-    description: '神秘的大师和魔物娘。森林开启任务。',
-    unlockConditions: '森林开启任务。',
-    guideSteps: [
-      '完成每次神社之门的挑战，与大师对话。分别在3次、4次、5次会遇到NYXARA。',
-      '如果第四次遇到NYXARA时先选择不要放走。会二次对话，大师质问时选择它答应不再使用邪恶能力。',
-      '完成大师的最终考验获得[b]“活武器”特性[/b]后大师会建造花园。',
-      '在道具店会有后续剧情。如果堕落模式选择共享安娜新解锁CG。'
-    ]
-  },
-  {
-    id: 'zuri',
-    name: '祖里 (Zuri)',
+    id: 'celes',
+    name: '赛里斯 (Celes)',
     role: CharacterRole.SUPPORT,
-    locations: ['商场', '市中心', '酒馆'],
-    avatarUrl: `${IMG_PATH}祖里.png`,
-    description: '服装店老板。配合乔伊的恶作剧开启。',
-    unlockConditions: '配合乔伊恶作剧开启。',
-    guideSteps: [
-      '骗祖里路到洗手间。如果你选择告知真相则独享；如果配合乔伊恶作剧则共享。',
-      '之后每周四可以在酒吧里遇到，并约到旅馆互动。',
-      '安娜泳装比赛失败后可以在服装店买新泳装。'
-    ]
-  },
-  {
-    id: 'celeste_ai',
-    name: '赛里斯 (Celeste - AI)',
-    role: CharacterRole.SPECIAL,
-    locations: ['实验室'],
+    locations: ['马里奥豪宅', '实验室', '图书馆'],
     avatarUrl: `${IMG_PATH}赛里斯.png`,
-    description: '隐藏角色，AI机器人。',
-    unlockConditions: '马里奥豪宅图书馆墙上红色按钮解锁实验室。',
+    description: '隐藏角色，需要在马里奥豪宅的图书馆解锁实验室后才能遇到。',
+    unlockConditions: '解锁马里奥豪宅实验室后',
     guideSteps: [
-      '马里奥豪宅的图书馆墙上有个[r]红色按钮[/r]可以解锁实验室。',
-      '进入实验室后与赛里斯对话进行对应的CG互动。'
-    ]
+      '前往马里奥豪宅的图书馆，找到红色按钮解锁实验室。',
+      '在实验室中可以找到赛里斯。',
+      '完成实验室相关任务后，可以解锁更多剧情。',
+      '与赛里斯建立关系后，可以获得科技相关的特殊能力。'
+    ],
+    tips: ['赛里斯是隐藏角色，需要完成特定条件才能解锁。']
   },
   {
-    id: 'river',
-    name: '河 (River)',
+    id: 'amelia',
+    name: '阿米莉亚 (Amelia)',
     role: CharacterRole.SUPPORT,
-    locations: ['郊区公园', '厕所', '家'],
-    avatarUrl: `${IMG_PATH}河.png`,
-    description: '男娘角色。与塔莎对话后解锁。',
-    unlockConditions: '与塔莎对话后解锁。',
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}阿米莉亚.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
     guideSteps: [
-      '周五公园互动推进。故事时间后每周五睡醒选择河来推进剧情（解锁伪娘CG）。',
-      '完成所有河的剧情后每周一可以去公园让河帮忙制作安娜服装。',
-      '凤凰分享线：必须完成所有凤凰前置任务。在公园解锁厕所后会遇到河与凤凰。在厕所与河进行互动CG。'
-    ]
+      '在商场多次偶遇阿米莉亚后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与阿米莉亚建立良好关系后，可以获得商场折扣等福利。'
+    ],
+    tips: ['阿米莉亚通常在商场的工作时间出现，建议在白天前往商场寻找她。']
   },
   {
-    id: 'himari',
-    name: '喜万里 (Himari)',
+    id: 'emma',
+    name: '艾玛 (Emma)',
     role: CharacterRole.SUPPORT,
-    locations: ['家', '商场', '荒地'],
-    avatarUrl: `${IMG_PATH}喜万里.png`,
-    description: '汽车销售。获得特性后经销商处解锁。',
-    unlockConditions: '获得特性后经销商处解锁。',
+    locations: ['家', '教堂', '商场'],
+    avatarUrl: `${IMG_PATH}艾玛.png`,
+    description: '经常在家、教堂和商场区域活动的角色。',
+    unlockConditions: '在家或教堂多次偶遇后解锁',
     guideSteps: [
-      '回到住处的车库选择前门触发喜万里假扮男友（解锁电梯）。',
-      '每周出门前可以先上电梯与喜万里父母进行对话推进剧情（解锁CG）。',
-      '直到触发喜万里想让父母离开，对话选择获得最终信任完成喜万里任务。',
-      '完成喜万里后摩托车比赛可以邀请她。'
-    ]
+      '在家或教堂多次偶遇艾玛后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与艾玛建立良好关系后，可以获得家庭相关的特殊剧情。'
+    ],
+    tips: ['艾玛通常在家或教堂出现，建议在特定时间前往寻找她。']
   },
   {
-    id: 'zero',
-    name: '零小姐 (Zero)',
+    id: 'alice',
+    name: '爱丽丝 (Alice)',
     role: CharacterRole.SUPPORT,
-    locations: ['霓虹灯街'],
-    avatarUrl: `${IMG_PATH}零小姐.png`,
-    description: '道具店老板。需完成加油站洗车任务。',
-    unlockConditions: '需完成加油站洗车任务。',
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}爱丽丝.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
     guideSteps: [
-      '只要每周一触发擦车任务，完成三次即可解锁[b]“变态”[/b]。',
-      '在道具店新对话来触发CG。',
-      'NYXARA线：如果在大师任务中选择放走NYXARA在店铺会有后续剧情。'
-    ]
+      '在商场多次偶遇爱丽丝后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与爱丽丝建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['爱丽丝通常在商场的工作时间出现，建议在白天前往商场寻找她。']
   },
   {
-    id: 'tasha',
-    name: '塔莎 (Tasha)',
+    id: 'master',
+    name: '大师 (Master)',
     role: CharacterRole.SUPPORT,
-    locations: ['漫画店', '森林'],
-    avatarUrl: `${IMG_PATH}塔莎.png`,
-    description: '漫画店老板。商店对话开启任务。',
-    unlockConditions: '商店对话开启任务。',
+    locations: ['大师商店', '市中心'],
+    avatarUrl: `${IMG_PATH}大师.png`,
+    description: '武器商店的老板，可以购买各种武器和装备。',
+    unlockConditions: '前往大师商店',
     guideSteps: [
-      '神社随机相遇。',
-      '私家侦探男友背叛任务去酒吧收集证据。酒吧不让进入时可以在凯特那里学习[b]“城市语言学家”[/b]特性。',
-      '把获得的照片拿给塔莎看获得信任后隔一天再次访问解锁CG。'
-    ]
+      '前往大师商店与大师交谈。',
+      '购买武器和装备来提升战斗能力。',
+      '完成特定任务后，可以解锁更多高级装备。'
+    ],
+    tips: ['大师商店是购买武器的主要地点，建议定期前往查看新装备。']
   },
   {
-    id: 'tony',
-    name: '托尼 (Tony)',
+    id: 'phoenix',
+    name: '凤凰 (Phoenix)',
     role: CharacterRole.SUPPORT,
-    locations: ['荒地', '家', '市中心'],
-    avatarUrl: `${IMG_PATH}托尼.png`,
-    description: '修车女，赛车手。首先要解锁安娜工作室没网。',
-    unlockConditions: '安娜工作室没网。',
+    locations: ['健身房', '商场', '市中心'],
+    avatarUrl: `${IMG_PATH}凤凰.png`,
+    description: '健身房教练，可以提供保镖服务和战斗训练。',
+    unlockConditions: '在健身房多次偶遇后解锁',
     guideSteps: [
-      '去购物商场找乔伊(Joy)他会让你帮助他拍照。',
-      '去服装店拍照后获得乔伊信任会告诉你托尼位置（荒地解锁新场景）。',
-      '参加摩托车需要6万美元资金（巷子里与托尼对话可以升级摩托车）。',
-      '赛车比赛三次（需要三周）去巷子里与托尼对话触发CG可以解锁住处。',
-      '然后可以把托尼带回家的停车场帮忙。'
-    ]
+      '在健身房多次偶遇凤凰后，可以开始与他互动。',
+      '完成保镖任务后，可以解锁更多剧情。',
+      '与凤凰建立良好关系后，可以获得战斗技能提升。'
+    ],
+    tips: ['凤凰通常在健身房出现，建议在训练时间前往寻找他。']
   },
   {
-    id: 'celeste_influencer',
-    name: '塞莱斯特 (Celeste - Influencer)',
-    role: CharacterRole.SPECIAL,
-    locations: ['网络', '商场', '荒地', '星际展'],
-    avatarUrl: `${IMG_PATH}塞莱斯.png`,
-    description: '超级网红。需要30k订阅，直播已解锁（完成托尼的任务），治愈安娜的抑郁症。',
-    unlockConditions: '30k订阅，直播已解锁，治愈安娜抑郁。',
-    guideSteps: [
-      '当您玩游戏时，一旦您开始提高订阅者，塞莱斯特候出现在商场。',
-      '在商场再次找到她，她会邀请你去荒芜之地的主题公园聊聊。被保镖拦住选第一个选项。',
-      '完成托尼继续任务后，前往粉丝见面会，与安娜对话可以邀请塞莱斯特。',
-      '周去主题公园见面，选择展示小东西。第二天再次访问，选择想找点好玩的。'
-    ]
-  },
-  {
-    id: 'kirby_robert',
-    name: '柯比 & 罗伯特 (Kirby & Robert)',
+    id: 'catalina',
+    name: '卡塔琳娜 (Catalina)',
     role: CharacterRole.SUPPORT,
-    locations: ['市中心', '牧场'],
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}卡塔琳娜.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇卡塔琳娜后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与卡塔琳娜建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['卡塔琳娜通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'kirby',
+    name: '柯比 (Kirby)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
     avatarUrl: `${IMG_PATH}柯比.png`,
-    description: '牧场经营者，牛娘。在市中心街道触发NPC解锁地图农场。',
-    unlockConditions: '市中心街道触发NPC解锁农场。',
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
     guideSteps: [
-      '去医院找医生选择“找一些东西生产牛奶“ 解锁特性[b]“催奶诱导师”[/b]。',
-      '去农场找柯比对话后，再去谷仓解锁“产奶器”。',
-      '产出金币后对话选择坚持让她帮忙挤解锁CG。',
-      '完成4次后会遇到木村夫人她想收购农场（强支线：卖/不卖）。'
-    ]
+      '在商场多次偶遇柯比后，可以开始与他互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与柯比建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['柯比通常在商场的工作时间出现，建议在白天前往商场寻找他。']
+  },
+  {
+    id: 'claudia',
+    name: '克劳迪娅 (Claudia)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}克劳迪娅.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇克劳迪娅后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与克劳迪娅建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['克劳迪娅通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'chloe',
+    name: '克罗伊 (Chloe)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}克罗伊.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇克罗伊后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与克罗伊建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['克罗伊通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'liz',
+    name: '丽兹 (Liz)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}丽兹.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇丽兹后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与丽兹建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['丽兹通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'miss_zero',
+    name: '零小姐 (Miss Zero)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}零小姐.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇零小姐后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与零小姐建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['零小姐通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'robert',
+    name: '罗伯特 (Robert)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}罗伯特.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇罗伯特后，可以开始与他互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与罗伯特建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['罗伯特通常在商场的工作时间出现，建议在白天前往商场寻找他。']
+  },
+  {
+    id: 'mario',
+    name: '马里奥 (Mario)',
+    role: CharacterRole.SUPPORT,
+    locations: ['马里奥豪宅', '市中心'],
+    avatarUrl: `${IMG_PATH}马里奥.png`,
+    description: '豪宅主人，拥有豪华别墅和图书馆。',
+    unlockConditions: '前往马里奥豪宅',
+    guideSteps: [
+      '前往马里奥豪宅与马里奥交谈。',
+      '探索豪宅的各个区域，包括图书馆。',
+      '完成特定任务后，可以解锁更多剧情和隐藏内容。'
+    ],
+    tips: ['马里奥豪宅是解锁隐藏角色赛里斯的关键地点。']
+  },
+  {
+    id: 'kimura',
+    name: '木村夫人 (Mrs. Kimura)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}木村夫人.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇木村夫人后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与木村夫人建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['木村夫人通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'nina',
+    name: '妮娜 (Nina)',
+    role: CharacterRole.SUPPORT,
+    locations: ['野外旅行', '营地', '森林'],
+    avatarUrl: `${IMG_PATH}妮娜.png`,
+    description: '野外旅行中的角色，经常与弗罗斯特一起出现。',
+    unlockConditions: '在野外旅行中多次偶遇后解锁',
+    guideSteps: [
+      '在野外旅行中多次偶遇妮娜后，可以开始与她互动。',
+      '完成特定的野外任务后，可以解锁更多剧情。',
+      '与妮娜建立良好关系后，可以获得野外生存技能等奖励。'
+    ],
+    tips: ['妮娜通常在野外营地出现，建议在野外旅行时留意她的踪迹。']
   },
   {
     id: 'clay',
     name: '黏土 (Clay)',
     role: CharacterRole.SUPPORT,
-    locations: ['牧场'],
+    locations: ['商场', '市中心', '健身房'],
     avatarUrl: `${IMG_PATH}黏土.png`,
-    description: '牧场男。',
-    unlockConditions: '农场房子里触发。',
-    guideSteps: ['在农场房子里触发NPC对话。', '解锁催奶诱导师后解锁商店功能。']
-  },
-  {
-    id: 'claudia',
-    name: '克劳迪娅 (Claudia)',
-    role: CharacterRole.SPECIAL,
-    locations: ['电视', '市中心'],
-    avatarUrl: `${IMG_PATH}克劳迪娅.png`,
-    description: '电视主播。',
-    unlockConditions: '周四客厅电视活动选择看“新闻”。',
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
     guideSteps: [
-      '星期三去市中心街道的酒吧可以预见（随机）。',
-      '对话选择：“抱歉 我不知道你是谁” -> “有一些方法可以娱乐你…” -> “我们现在就可以…” -> “你为什么告诉我…”。',
-      '接近后开始CG（选择其“他”会消失）。'
-    ]
+      '在商场多次偶遇黏土后，可以开始与他互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与黏土建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['黏土通常在商场的工作时间出现，建议在白天前往商场寻找他。']
   },
   {
-    id: 'melody',
-    name: '乐声 (Melody)',
-    role: CharacterRole.SPECIAL,
-    locations: ['海滨'],
-    avatarUrl: `${IMG_PATH}乐声.png`,
-    description: '音乐人。',
-    unlockConditions: '星期五流行音乐教父和乐声在海滩解锁。',
-    guideSteps: ['互动需要[b]”变态“[/b]或[b]“活武器”[/b]特性。']
-  },
-  {
-    id: 'mrs_kimura',
-    name: '木村夫人 (Mrs. Kimura)',
-    role: CharacterRole.SPECIAL,
-    locations: ['家', '牧场', '市中心'],
-    avatarUrl: `${IMG_PATH}木村夫人.png`,
-    description: '喜万里的母亲。',
-    unlockConditions: '完成4次牧场挤奶任务触发买卖农场剧情。',
+    id: 'tasha',
+    name: '塔莎 (Tasha)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}塔莎.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
     guideSteps: [
-      '可以选择考虑 -> 询问其他意见。选择不卖柯比会留下（强支线）；选择卖掉柯比会生气的离开。',
-      '选择考虑后木村夫人会在街道区域酒店里出现，但是不要理会。',
-      '多次无视她直到出现抗议，然后解锁69号房间。对话后解锁CG。'
-    ]
-  }
-];
-
-export const TOOL_CHANGELOG: UpdateLog[] = [
-  {
-    version: '1.0',
-    date: '2024-03-20',
-    changes: [
-      'UI重构：全面升级为Win11 Mica风格，界面更明亮、大气。',
-      '结构优化：取消引导页，将人物详情整合为单页显示，提升阅读体验。',
-      '内容更新：补全所有人物的详细攻略流程、对话选择及节日事件。',
-      '功能更新：黑客工具箱更名为黑客答案，修正部分文案。',
-      '侧边栏升级：更大的动态标题，更清晰的导航结构。',
-      '体验优化：点击黑客代码即可自动复制，新增特别感谢名单。',
-      '视觉增强：整体字体放大，按照攻略重点增加了颜色高亮（红/蓝/绿）和加粗显示，提升阅读轻松度。'
-    ]
-  }
-];
-
-export const GAME_CHANGELOG: UpdateLog[] = [
-  {
-    version: 'Game Updates',
-    date: 'Latest',
-    changes: [
-      '请访问官方更新日志查看最新游戏内容：',
-      'https://arvusgames.itch.io/starmakerstory'
-    ]
+      '在商场多次偶遇塔莎后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与塔莎建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['塔莎通常在商场的工作时间出现，建议在白天前往商场寻找她。']
   },
   {
-    version: '1.7',
-    date: '2023-10-01',
-    changes: [
-      '新增：农场/牧场游戏模式和场景。',
-      '新增：角色柯比、罗伯特、黏土、木村夫人。',
-      '修复：修复了“死机”卡顿问题（F1 x 10）。',
-      '新增：节日系统。',
-      '剧情：增加了索菲亚的新分支路径。'
-    ]
+    id: 'tristan',
+    name: '特里斯坦 (Tristan)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}特里斯坦.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇特里斯坦后，可以开始与他互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与特里斯坦建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['特里斯坦通常在商场的工作时间出现，建议在白天前往商场寻找他。']
   },
   {
-    version: '1.6B',
-    date: '2023-08-15',
-    changes: [
-      '新增：节日活动（情人节、万圣节、圣诞节）。',
-      '功能：更新了摄影机制。',
-      '剧情：扩展了夏洛特的保镖线。'
-    ]
+    id: 'tony',
+    name: '托尼 (Tony)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}托尼.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇托尼后，可以开始与他互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与托尼建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['托尼通常在商场的工作时间出现，建议在白天前往商场寻找他。']
+  },
+  {
+    id: 'xiwanli',
+    name: '喜万里 (Xiwanli)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}喜万里.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇喜万里后，可以开始与他互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与喜万里建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['喜万里通常在商场的工作时间出现，建议在白天前往商场寻找他。']
+  },
+  {
+    id: 'isabella',
+    name: '伊莎贝拉 (Isabella)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}伊莎贝拉.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇伊莎贝拉后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与伊莎贝拉建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['伊莎贝拉通常在商场的工作时间出现，建议在白天前往商场寻找她。']
+  },
+  {
+    id: 'zuri',
+    name: '祖里 (Zuri)',
+    role: CharacterRole.SUPPORT,
+    locations: ['商场', '市中心', '健身房'],
+    avatarUrl: `${IMG_PATH}祖里.png`,
+    description: '经常在商场和市中心区域活动的角色。',
+    unlockConditions: '在商场多次偶遇后解锁',
+    guideSteps: [
+      '在商场多次偶遇祖里后，可以开始与她互动。',
+      '完成特定任务后，可以解锁更多剧情。',
+      '与祖里建立良好关系后，可以获得特殊奖励。'
+    ],
+    tips: ['祖里通常在商场的工作时间出现，建议在白天前往商场寻找她。']
   }
 ];
-
-export const SUPPORTERS = [
-  "水友吴*", "司暴君 (作者)", "所有支持过爱发电的玩家"
-];
-
-export const AUTHOR_INFO = {
-  name: '司暴君',
-  platforms: [
-    { 
-      name: 'Bilibili', 
-      icon: <Target className="w-4 h-4" />,
-      link: 'https://space.bilibili.com/30964521?spm_id_from=333.1387.0.0'
-    },
-    { 
-      name: '抖音', 
-      icon: <Users className="w-4 h-4" />,
-      link: 'https://www.douyin.com/user/MS4wLjABAAAAWwSM3NnmEU7SDAl0r0POjk34gSZZ1SFYz0JXM0a_YOPylnDyF4ODBBnD-Ld5wDs5?from_tab_name=main'
-    }
-  ],
-  description: '全网最全攻略作者，坚持手打更新。',
-  supportMessage: '纯凭心意对攻略作者进行支持和投喂，为爱发电！',
-  supportersLink: '#',
-  feedbackGroupLink: 'https://qm.qq.com/cgi-bin/qm/qr?k=placeholder',
-  qrWechat: `${IMG_PATH}微信.png`,
-  qrAlipay: `${IMG_PATH}支付宝.png`
-};
