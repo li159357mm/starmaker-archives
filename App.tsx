@@ -1106,7 +1106,7 @@ export default function App() {
         return (
           <div className="space-y-10 animate-fade-in pb-16">
             {/* Hero Section */}
-            <div className="relative h-[500px] w-full rounded-[2rem] overflow-hidden shadow-2xl group">
+            <div className="relative h-[400px] md:h-[500px] w-full rounded-[2rem] overflow-hidden shadow-2xl group">
               {/* Background Slideshow */}
               {heroCharacters.map((char, index) => (
                 <div 
@@ -1123,30 +1123,30 @@ export default function App() {
               ))}
 
               {/* Hero Content */}
-              <div className="absolute inset-0 p-16 flex flex-col justify-center max-w-3xl text-white z-10">
-        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-sm font-bold tracking-widest uppercase mb-6 w-fit">
-          <span className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></span>
-          Online v1.1
-        </div>
-                <h1 className="text-7xl font-black mb-6 tracking-tighter leading-tight">
+              <div className="absolute inset-0 p-6 md:p-16 flex flex-col justify-center max-w-3xl text-white z-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-xs md:text-sm font-bold tracking-widest uppercase mb-4 md:mb-6 w-fit">
+                  <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-green-400 rounded-full animate-pulse"></span>
+                  Online v1.1
+                </div>
+                <h1 className="text-4xl md:text-7xl font-black mb-4 md:mb-6 tracking-tighter leading-tight">
                   造星物语<br/>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">详细攻略档案</span>
                 </h1>
-                <p className="text-xl text-slate-200 mb-10 leading-relaxed text-shadow-sm max-w-xl">
+                <p className="text-sm md:text-xl text-slate-200 mb-6 md:mb-10 leading-relaxed text-shadow-sm max-w-xl">
                   一站式查询所有人物剧情分支、隐藏要素、节日活动及黑客代码。
                   {AUTHOR_INFO.description}
                 </p>
                 
-                <div className="flex gap-6">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-6">
                   <button 
                     onClick={() => setCurrentView(ViewState.CHARACTER_LIST)}
-                    className="px-10 py-4 bg-white text-slate-900 rounded-2xl font-bold text-lg hover:scale-105 transition-transform flex items-center gap-3 shadow-lg shadow-white/10"
+                    className="px-6 py-3 md:px-10 md:py-4 bg-white text-slate-900 rounded-xl md:rounded-2xl font-bold text-base md:text-lg hover:scale-105 transition-transform flex items-center justify-center gap-2 md:gap-3 shadow-lg shadow-white/10"
                   >
-                    开始查阅 <ChevronRight size={24} />
+                    开始查阅 <ChevronRight size={20} className="md:size-6" />
                   </button>
                   <button 
                     onClick={() => setCurrentView(ViewState.GAME_GUIDES)}
-                    className="px-10 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-colors"
+                    className="px-6 py-3 md:px-10 md:py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white rounded-xl md:rounded-2xl font-bold text-base md:text-lg hover:bg-white/20 transition-colors"
                   >
                     新手指南
                   </button>
@@ -1154,12 +1154,12 @@ export default function App() {
               </div>
 
               {/* Slide Indicators */}
-              <div className="absolute bottom-8 right-10 flex gap-3">
+              <div className="absolute bottom-4 md:bottom-8 right-4 md:right-10 flex gap-2 md:gap-3">
                 {heroCharacters.map((_, idx) => (
                   <button 
                     key={idx}
                     onClick={() => setHeroImageIndex(idx)}
-                    className={`h-2 rounded-full transition-all ${idx === heroImageIndex ? 'w-12 bg-white' : 'w-3 bg-white/40'}`}
+                    className={`h-1.5 md:h-2 rounded-full transition-all ${idx === heroImageIndex ? 'w-8 md:w-12 bg-white' : 'w-2 md:w-3 bg-white/40'}`}
                     title={`切换幻灯片`}
                     aria-label={`切换幻灯片`}
                   />
